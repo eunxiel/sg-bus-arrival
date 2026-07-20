@@ -144,7 +144,7 @@ export function PlaceInput({
           }}
           onFocus={() => setIsOpen(true)}
           placeholder={placeholder}
-          className="w-full bg-transparent text-base text-slate-800 placeholder:text-slate-400 focus:outline-none sm:text-sm"
+          className="w-full bg-transparent caret-brand-600 text-base text-slate-800 placeholder:text-slate-400 focus:outline-none sm:text-sm"
         />
         {query.length > 0 && (
           <button
