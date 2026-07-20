@@ -73,4 +73,76 @@ export async function ltaFetch<T>(
   return (await response.json()) as T;
 }
 
+interface PaginatedResponse<T> {
+  value?: T[];
+}
+
+interface FetchAllPagesOptions {
+  pageSize?: number;
+  maxPages?: number;
+  concurrency?: number;
+}
+
+async function fetchPageWithRetry<T>(
+  path: string,
+  skip: number,
+  retries = 2
+): Promise<PaginatedResponse<T>> {
+  for (let attempt = 0; ; attempt++) {
+    try {
+      return await ltaFetch<PaginatedResponse<T>>(path, { params: { $skip: skip } });
+    } catch (err) {
+      // LTA occasionally 500s a page under concurrent load even well within
+      // the real dataset range — treating that as "end of data" would
+      // silently truncate results, so retry a couple times before giving up.
+      if (attempt >= retries) throw err;
+      await new Promise((resolve) => setTimeout(resolve, 300 * (attempt + 1)));
+    }
+  }
+}
+
+/**
+ * LTA's list endpoints (BusStops, BusRoutes, BusServices) paginate at 500
+ * rows per page via $skip, with no way to know the total count up front.
+ * Fetching pages one-at-a-time (await each, then request the next) means a
+ * ~26k-row dataset like BusRoutes takes ~50 sequential round trips — tens of
+ * seconds on a cold cache. Instead, fetch pages in concurrent batches and
+ * stop once a page in a batch comes back short (the last page); any
+ * speculative pages requested past the end just return empty and are
+ * harmless.
+ */
+export async function fetchAllPages<T>(
+  path: string,
+  options: FetchAllPagesOptions = {}
+): Promise<T[]> {
+  const pageSize = options.pageSize ?? 500;
+  const maxPages = options.maxPages ?? 80;
+  const concurrency = options.concurrency ?? 10;
+
+  const all: T[] = [];
+  let page = 0;
+  let done = false;
+
+  while (!done && page < maxPages) {
+    const batchPages = Array.from(
+      { length: Math.min(concurrency, maxPages - page) },
+      (_, i) => page + i
+    );
+
+    const results = await Promise.all(
+      batchPages.map((p) => fetchPageWithRetry<T>(path, p * pageSize))
+    );
+
+    for (const data of results) {
+      const values = data.value ?? [];
+      all.push(...values);
+      if (values.length < pageSize) done = true;
+    }
+
+    page += batchPages.length;
+  }
+
+  return all;
+}
+
 export { LtaApiError };
