@@ -103,7 +103,7 @@ export function BusDetailsView({ serviceNo, busStopCode }: BusDetailsViewProps) 
               {status && (
                 <span
                   className={cn(
-                    "mt-1 inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-medium",
+                    "mt-1 inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-0.5 text-xs font-medium",
                     status.status === "in_operation" &&
                       "bg-emerald-100 text-emerald-700",
                     status.status === "ending_soon" &&
