@@ -35,76 +35,24 @@ export function Navbar() {
           <span className="hidden text-base sm:inline">SG Bus Arrival</span>
         </Link>
 
-        <div className="hidden flex-1 md:block">
+        <div
+          className={cn(
+            "min-w-0 flex-1",
+            mobileOpen ? "block" : "hidden",
+            "md:block"
+          )}
+        >
           <SearchBar />
         </div>
 
         <nav
-          className="ml-auto hidden items-center gap-1.5 md:flex"
+          className={cn(
+            "items-center gap-1.5",
+            mobileOpen ? "flex" : "hidden",
+            "md:flex"
+          )}
           aria-label="Primary"
         >
-          <button
-            type="button"
-            onClick={locate}
-            disabled={loading}
-            aria-label={t("nav.locateAria")}
-            className="btn-glass h-10 w-10 p-0"
-          >
-            <Locate
-              className={cn("h-4.5 w-4.5", loading && "animate-pulse")}
-              aria-hidden="true"
-            />
-          </button>
-          <Link
-            href="/notifications"
-            aria-label={
-              t("nav.notifications") +
-              (unreadCount > 0 ? t("nav.unreadSuffix", { count: unreadCount }) : "")
-            }
-            className="btn-glass relative h-10 w-10 p-0"
-          >
-            <Bell className="h-4.5 w-4.5" aria-hidden="true" />
-            {unreadCount > 0 && (
-              <span className="absolute -right-0.5 -top-0.5 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
-                {unreadCount > 9 ? "9+" : unreadCount}
-              </span>
-            )}
-          </Link>
-          <Link
-            href="/settings"
-            aria-label={t("nav.settings")}
-            className="btn-glass h-10 w-10 p-0"
-          >
-            <Settings className="h-4.5 w-4.5" aria-hidden="true" />
-          </Link>
-          <LanguageMenu />
-        </nav>
-
-        <button
-          type="button"
-          onClick={() => setMobileOpen((v) => !v)}
-          aria-label={mobileOpen ? "Close menu" : "Open menu"}
-          aria-expanded={mobileOpen}
-          className="btn-glass ml-auto h-10 w-10 p-0 md:hidden"
-        >
-          {mobileOpen ? (
-            <X className="h-4.5 w-4.5" aria-hidden="true" />
-          ) : (
-            <Menu className="h-4.5 w-4.5" aria-hidden="true" />
-          )}
-        </button>
-      </motion.div>
-
-      {mobileOpen && (
-        <motion.div
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
-          className="glass-panel mx-auto mt-2 flex max-w-6xl items-center gap-1.5 rounded-4xl p-3 md:hidden"
-        >
-          <div className="min-w-0 flex-1">
-            <SearchBar />
-          </div>
           <button
             type="button"
             onClick={locate}
@@ -140,8 +88,22 @@ export function Navbar() {
             <Settings className="h-4.5 w-4.5" aria-hidden="true" />
           </Link>
           <LanguageMenu />
-        </motion.div>
-      )}
+        </nav>
+
+        <button
+          type="button"
+          onClick={() => setMobileOpen((v) => !v)}
+          aria-label={mobileOpen ? "Close menu" : "Open menu"}
+          aria-expanded={mobileOpen}
+          className="btn-glass ml-auto h-10 w-10 shrink-0 p-0 md:hidden"
+        >
+          {mobileOpen ? (
+            <X className="h-4.5 w-4.5" aria-hidden="true" />
+          ) : (
+            <Menu className="h-4.5 w-4.5" aria-hidden="true" />
+          )}
+        </button>
+      </motion.div>
     </header>
   );
 }
