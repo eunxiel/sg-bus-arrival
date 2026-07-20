@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useQuery } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "framer-motion";
-import { Landmark, Locate, MapPin, ShoppingBag, X } from "lucide-react";
+import { Landmark, Locate, MapPin, Search, ShoppingBag, X } from "lucide-react";
 import { apiGet } from "@/lib/api-client";
 import { debounce, cn } from "@/lib/utils";
 import { useGeolocation } from "@/hooks/use-geolocation";
@@ -189,19 +189,29 @@ export function PlaceInput({
                   className="glass-search-panel z-50 max-h-80 overflow-y-auto p-2"
                 >
                   {allowCurrentLocation && query.trim().length === 0 && (
-                    <button
-                      type="button"
-                      onClick={handleUseCurrentLocation}
-                      disabled={locating}
-                      className="flex w-full items-center gap-3 rounded-2xl p-3 text-left transition-colors hover:bg-brand-50 disabled:opacity-60"
-                    >
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-blue text-white">
-                        <Locate className={cn("h-4 w-4", locating && "animate-pulse")} aria-hidden="true" />
-                      </span>
-                      <span className="text-sm font-medium text-slate-800">
-                        {locating ? t("hero.findingLocation") : t("common.useCurrentLocation")}
-                      </span>
-                    </button>
+                    <>
+                      <div className="flex w-full items-center gap-3 rounded-2xl p-3 text-left text-slate-400">
+                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-slate-400">
+                          <Search className="h-4 w-4" aria-hidden="true" />
+                        </span>
+                        <span className="text-sm font-medium">
+                          {t("trip.searchHint")}
+                        </span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={handleUseCurrentLocation}
+                        disabled={locating}
+                        className="flex w-full items-center gap-3 rounded-2xl p-3 text-left transition-colors hover:bg-brand-50 disabled:opacity-60"
+                      >
+                        <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-blue text-white">
+                          <Locate className={cn("h-4 w-4", locating && "animate-pulse")} aria-hidden="true" />
+                        </span>
+                        <span className="text-sm font-medium text-slate-800">
+                          {locating ? t("hero.findingLocation") : t("common.useCurrentLocation")}
+                        </span>
+                      </button>
+                    </>
                   )}
 
                   {query.trim().length > 0 && isFetching && (
