@@ -2,14 +2,16 @@
 
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { motion } from "framer-motion";
-import { ArrowLeftRight, Flag, MapPin, Navigation } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowLeftRight, ChevronDown, Flag, MapPin, Navigation } from "lucide-react";
 import { PlaceInput, type Place } from "@/components/trip/place-input";
 import { AnimatedCountdown } from "@/components/bus/animated-countdown";
 import { OccupancyBadge, WheelchairBadge } from "@/components/bus/service-badges";
+import { RouteMapDynamic } from "@/components/map/route-map-dynamic";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
 import { TripSuggestionsSkeleton } from "@/components/ui/skeletons";
 import { apiGet } from "@/lib/api-client";
+import { useBusRoute } from "@/hooks/use-bus-route";
 import { useTranslation } from "@/hooks/use-translation";
 import { cn, formatClock, formatDistance } from "@/lib/utils";
 import type { TripSuggestion } from "@/types/bus";
@@ -131,6 +133,7 @@ function TripSuggestionCard({
   rank: number;
 }) {
   const { t } = useTranslation();
+  const [expanded, setExpanded] = useState(false);
   const arrivalISO = new Date(Date.now() + suggestion.totalSeconds * 1000).toISOString();
   const totalMinutes = Math.max(1, Math.round(suggestion.totalSeconds / 60));
 
@@ -155,9 +158,6 @@ function TripSuggestionCard({
             <p className="truncate text-sm font-semibold text-slate-800">
               {t("trip.totalArrival", { minutes: totalMinutes, time: formatClock(arrivalISO) })}
             </p>
-            <p className="truncate text-xs text-slate-400">
-              {t("trip.viaStops", { count: suggestion.numStops })}
-            </p>
           </div>
         </div>
         <AnimatedCountdown etaSeconds={suggestion.boardEtaSeconds} size="sm" />
@@ -181,10 +181,120 @@ function TripSuggestionCard({
         </p>
       </div>
 
-      <div className="mt-3 flex flex-wrap items-center gap-2">
-        <OccupancyBadge load={suggestion.load} />
-        <WheelchairBadge accessible={suggestion.wheelchairAccessible} />
+      <div className="mt-3 flex flex-wrap items-center justify-between gap-2">
+        <div className="flex flex-wrap items-center gap-2">
+          <OccupancyBadge load={suggestion.load} />
+          <WheelchairBadge accessible={suggestion.wheelchairAccessible} />
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setExpanded((v) => !v)}
+          aria-expanded={expanded}
+          className="flex items-center gap-1 rounded-full py-1 pl-2.5 pr-1.5 text-xs font-medium text-brand-600 transition-colors hover:bg-brand-50"
+        >
+          {t("trip.viaStops", { count: suggestion.numStops })}
+          <ChevronDown
+            className={cn("h-3.5 w-3.5 transition-transform", expanded && "rotate-180")}
+            aria-hidden="true"
+          />
+        </button>
       </div>
+
+      <AnimatePresence initial={false}>
+        {expanded && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            className="overflow-hidden"
+          >
+            <TripStopsDetail suggestion={suggestion} />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
+  );
+}
+
+function TripStopsDetail({ suggestion }: { suggestion: TripSuggestion }) {
+  const { t } = useTranslation();
+  const { data, isLoading } = useBusRoute(suggestion.serviceNo, suggestion.direction);
+  const routeStops = data?.route ?? [];
+
+  const boardIndex = routeStops.findIndex(
+    (r) => r.busStopCode === suggestion.boardStop.busStopCode
+  );
+  const alightIndex = routeStops.findIndex(
+    (r) => r.busStopCode === suggestion.alightStop.busStopCode
+  );
+  const segment =
+    boardIndex >= 0 && alightIndex >= boardIndex
+      ? routeStops.slice(boardIndex, alightIndex + 1)
+      : [];
+
+  if (isLoading) {
+    return (
+      <div className="mt-3 space-y-3 border-t border-slate-100 pt-3">
+        <div className="h-40 animate-pulse rounded-3xl bg-slate-100" />
+        <div className="h-24 animate-pulse rounded-2xl bg-slate-100" />
+      </div>
+    );
+  }
+
+  if (segment.length === 0) {
+    return (
+      <p className="mt-3 border-t border-slate-100 pt-3 text-xs text-slate-400">
+        {t("trip.stopsUnavailable")}
+      </p>
+    );
+  }
+
+  return (
+    <div className="mt-3 space-y-3 border-t border-slate-100 pt-3">
+      <ErrorBoundary fallbackTitle={t("route.mapError")}>
+        <div className="h-40 overflow-hidden rounded-3xl">
+          <RouteMapDynamic
+            routeStops={segment}
+            currentStopCode={suggestion.boardStop.busStopCode}
+          />
+        </div>
+      </ErrorBoundary>
+
+      <p className="text-[11px] font-medium uppercase tracking-wide text-slate-400">
+        {t("trip.viaStops", { count: suggestion.numStops })}
+      </p>
+
+      <ol className="max-h-56 space-y-0 overflow-y-auto pr-1">
+        {segment.map((stop, index) => {
+          const isFirst = index === 0;
+          const isLast = index === segment.length - 1;
+          return (
+            <li key={`${stop.busStopCode}-${index}`} className="flex gap-3">
+              <div className="flex flex-col items-center">
+                <span
+                  className={cn(
+                    "mt-1 h-2 w-2 shrink-0 rounded-full",
+                    isFirst || isLast ? "bg-brand-600" : "bg-slate-300"
+                  )}
+                />
+                {!isLast && <span className="w-px flex-1 bg-slate-200" />}
+              </div>
+              <p
+                className={cn(
+                  "min-w-0 flex-1 truncate pb-3 text-xs",
+                  isFirst || isLast
+                    ? "font-semibold text-slate-800"
+                    : "text-slate-500"
+                )}
+              >
+                {stop.stop?.description ?? stop.busStopCode}
+              </p>
+            </li>
+          );
+        })}
+      </ol>
+    </div>
   );
 }

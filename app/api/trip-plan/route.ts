@@ -17,6 +17,7 @@ const MAX_SUGGESTIONS = 8;
 
 interface Candidate {
   serviceNo: string;
+  direction: number;
   originStopCode: string;
   destStopCode: string;
   walkMeters: number;
@@ -96,6 +97,7 @@ export async function GET(request: NextRequest) {
 
           candidates.push({
             serviceNo: originRow.serviceNo,
+            direction: originRow.direction,
             originStopCode: originRow.busStopCode,
             destStopCode: destRow.busStopCode,
             walkMeters: originDistanceByStop.get(originRow.busStopCode) ?? 0,
@@ -132,6 +134,7 @@ export async function GET(request: NextRequest) {
 
       suggestions.push({
         serviceNo: c.serviceNo,
+        direction: c.direction,
         operator: service.operatorFullName,
         boardStop: {
           busStopCode: c.originStopCode,

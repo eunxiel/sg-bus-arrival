@@ -107,6 +107,7 @@ export interface FavoriteService {
 export interface TripSuggestion {
   serviceNo: string;
   operator: string;
+  direction: number;
   boardStop: {
     busStopCode: string;
     description: string;
