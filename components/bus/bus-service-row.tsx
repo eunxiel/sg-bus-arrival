@@ -57,12 +57,14 @@ export function BusServiceRow({
               <span className="min-w-0 flex-1 truncate text-[11px] text-slate-400">
                 {service.operatorFullName}
               </span>
+              <span className="shrink-0">
+                <DeckTypeBadge type={next.busType} />
+              </span>
             </div>
             <div className="mt-1 flex items-center gap-2 flex-wrap">
               {next.monitored && <AirConBadge />}
               <OccupancyBadge load={next.load} />
               <WheelchairBadge accessible={next.wheelchairAccessible} />
-              <DeckTypeBadge type={next.busType} />
             </div>
           </div>
         </Link>
