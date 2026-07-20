@@ -126,11 +126,9 @@ export interface TripSuggestion {
   wheelchairAccessible: boolean;
 }
 
-export type MapTheme = "light" | "dark" | "satellite";
 export type AppLanguage = "en" | "zh" | "th" | "ms" | "id";
 
 export interface AppSettings {
   language: AppLanguage;
   refreshIntervalSeconds: number;
-  mapTheme: MapTheme;
 }

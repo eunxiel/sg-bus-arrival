@@ -8,7 +8,6 @@ const KEY = "sgbus:settings";
 export const DEFAULT_SETTINGS: AppSettings = {
   language: "en",
   refreshIntervalSeconds: 15,
-  mapTheme: "light",
 };
 
 export function useSettings() {

@@ -15,7 +15,6 @@ import {
 } from "@/lib/map-icons";
 import { haversineDistanceMeters, formatDistance } from "@/lib/utils";
 import type { BusStop, RouteStop } from "@/types/bus";
-import { useSettings } from "@/hooks/use-settings";
 import { useTranslation } from "@/hooks/use-translation";
 
 interface RouteMapProps {
@@ -24,27 +23,14 @@ interface RouteMapProps {
   currentStopCode?: string | null;
 }
 
-const TILE_LAYERS = {
-  light: {
-    url: "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-    attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-  },
-  dark: {
-    url: "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
-    attribution:
-      '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-  },
-  satellite: {
-    url: "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}",
-    attribution: "Tiles &copy; Esri",
-  },
+const LIGHT_TILE_LAYER = {
+  url: "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+  attribution:
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
 };
 
 export function RouteMap({ routeStops, liveBus, currentStopCode }: RouteMapProps) {
-  const { settings } = useSettings();
   const { t } = useTranslation();
-  const tileLayer = TILE_LAYERS[settings.mapTheme];
 
   const stopsWithLocation = useMemo(
     () => routeStops.filter((r): r is RouteStop & { stop: BusStop } => Boolean(r.stop)),
@@ -89,7 +75,7 @@ export function RouteMap({ routeStops, liveBus, currentStopCode }: RouteMapProps
         className="h-full w-full"
         aria-label={t("map.interactiveRouteAria")}
       >
-        <TileLayer url={tileLayer.url} attribution={tileLayer.attribution} />
+        <TileLayer url={LIGHT_TILE_LAYER.url} attribution={LIGHT_TILE_LAYER.attribution} />
 
         {polylinePositions.length > 1 && (
           <Polyline
