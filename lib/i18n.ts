@@ -51,6 +51,7 @@ const en: Dict = {
   "serviceRow.next": "Next: {time}",
   "serviceRow.after": "After: {time}",
   "serviceRow.noArrival": "No arrival data available right now",
+  "serviceRow.viewRouteHint": "Tap to view route",
 
   "common.busLabel": "Bus {serviceNo}",
   "common.useCurrentLocation": "Use current location",
@@ -203,6 +204,7 @@ const zh: Dict = {
   "serviceRow.next": "下一班：{time}",
   "serviceRow.after": "之后：{time}",
   "serviceRow.noArrival": "暂无到站数据",
+  "serviceRow.viewRouteHint": "点击查看路线",
 
   "common.busLabel": "{serviceNo}路公交",
   "common.useCurrentLocation": "使用当前位置",
@@ -355,6 +357,7 @@ const th: Dict = {
   "serviceRow.next": "ถัดไป: {time}",
   "serviceRow.after": "หลังจากนั้น: {time}",
   "serviceRow.noArrival": "ไม่มีข้อมูลการมาถึงในขณะนี้",
+  "serviceRow.viewRouteHint": "แตะเพื่อดูเส้นทาง",
 
   "common.busLabel": "รถเมล์สาย {serviceNo}",
   "common.useCurrentLocation": "ใช้ตำแหน่งปัจจุบัน",
@@ -507,6 +510,7 @@ const ms: Dict = {
   "serviceRow.next": "Seterusnya: {time}",
   "serviceRow.after": "Selepas itu: {time}",
   "serviceRow.noArrival": "Tiada data ketibaan buat masa ini",
+  "serviceRow.viewRouteHint": "Ketik untuk lihat laluan",
 
   "common.busLabel": "Bas {serviceNo}",
   "common.useCurrentLocation": "Guna lokasi semasa",
@@ -659,6 +663,7 @@ const id: Dict = {
   "serviceRow.next": "Berikutnya: {time}",
   "serviceRow.after": "Setelah itu: {time}",
   "serviceRow.noArrival": "Tidak ada data kedatangan saat ini",
+  "serviceRow.viewRouteHint": "Ketuk untuk lihat rute",
 
   "common.busLabel": "Bus {serviceNo}",
   "common.useCurrentLocation": "Gunakan lokasi saat ini",

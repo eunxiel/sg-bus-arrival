@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Bus, Heart, Bus as BusFront } from "lucide-react";
+import { Bus, Heart, MapPin, Bus as BusFront } from "lucide-react";
 import { AnimatedCountdown } from "@/components/bus/animated-countdown";
 import {
   AirConBadge,
@@ -100,13 +100,21 @@ export function BusServiceRow({
             <Bus className="h-3 w-3" aria-hidden="true" />
             {t("serviceRow.after", { time: formatCountdown(next3.etaSeconds, countdownLabels) })}
           </span>
+          <span className="ml-auto flex items-center gap-1 text-slate-400">
+            <MapPin className="h-3 w-3" aria-hidden="true" />
+            {t("serviceRow.viewRouteHint")}
+          </span>
         </div>
       )}
 
       {!hasArrival && (
-        <p className="mt-2 pl-[3.25rem] text-xs text-slate-400">
-          {t("serviceRow.noArrival")}
-        </p>
+        <div className="mt-2 flex items-center pl-[3.25rem] text-xs text-slate-400">
+          <p>{t("serviceRow.noArrival")}</p>
+          <span className="ml-auto flex items-center gap-1">
+            <MapPin className="h-3 w-3" aria-hidden="true" />
+            {t("serviceRow.viewRouteHint")}
+          </span>
+        </div>
       )}
     </motion.div>
   );
