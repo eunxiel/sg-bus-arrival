@@ -160,7 +160,7 @@ body::after {
   border-radius: 20px !important;
   backdrop-filter: blur(20px);
   background: rgba(255, 255, 255, 0.85) !important;
-  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15) !important;
+  box-shadow: 0 8px 32px rgba(172, 45, 92, 0.15) !important;
 }
 .leaflet-popup-tip {
   background: rgba(255, 255, 255, 0.85) !important;

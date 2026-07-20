@@ -9,7 +9,7 @@ import L from "leaflet";
 export function createStopIcon(options?: { highlighted?: boolean }) {
   const highlighted = options?.highlighted ?? false;
   const size = highlighted ? 16 : 10;
-  const color = highlighted ? "#1b62f5" : "#94a3b8";
+  const color = highlighted ? "#cf3f74" : "#94a3b8";
 
   return L.divIcon({
     className: "sgbus-stop-icon",
@@ -65,12 +65,12 @@ export function createUserLocationIcon() {
     html: `<div style="position:relative;width:20px;height:20px;">
       <span style="
         position:absolute;inset:0;border-radius:9999px;
-        background:rgba(51,130,255,0.35);
+        background:rgba(227,93,144,0.35);
         animation:pulseRing 1.8s cubic-bezier(0.4,0,0.6,1) infinite;
       "></span>
       <span style="
         position:absolute;top:4px;left:4px;width:12px;height:12px;
-        border-radius:9999px;background:#1b62f5;border:2px solid white;
+        border-radius:9999px;background:#cf3f74;border:2px solid white;
         box-shadow:0 1px 4px rgba(0,0,0,0.3);
       "></span>
     </div>`,
@@ -85,9 +85,9 @@ export function createBusIcon(bearingDeg = 0) {
     html: `<div style="
       display:flex;align-items:center;justify-content:center;
       width:34px;height:34px;border-radius:9999px;
-      background:linear-gradient(135deg,#59a4ff,#1b62f5);
+      background:linear-gradient(135deg,#ed85ac,#cf3f74);
       border:3px solid white;
-      box-shadow:0 6px 16px rgba(27,98,245,0.5);
+      box-shadow:0 6px 16px rgba(207,63,116,0.5);
       transform:rotate(${bearingDeg}deg);
       transition:transform 0.6s ease-out;
     ">

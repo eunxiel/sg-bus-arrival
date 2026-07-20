@@ -9,17 +9,17 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          50: "#eef6ff",
-          100: "#d9ecff",
-          200: "#bcdcff",
-          300: "#8ec4ff",
-          400: "#59a4ff",
-          500: "#3382ff",
-          600: "#1b62f5",
-          700: "#144de1",
-          800: "#173fb6",
-          900: "#18398f",
-          950: "#132458",
+          50: "#fef6f9",
+          100: "#fce7ef",
+          200: "#f9d0e0",
+          300: "#f4aec9",
+          400: "#ed85ac",
+          500: "#e35d90",
+          600: "#cf3f74",
+          700: "#ac2d5c",
+          800: "#8a2549",
+          900: "#6f213e",
+          950: "#3d0f20",
         },
       },
       fontFamily: {
@@ -51,13 +51,13 @@ const config: Config = {
         xs: "2px",
       },
       boxShadow: {
-        glass: "0 8px 32px 0 rgba(31, 38, 135, 0.12)",
-        "glass-lg": "0 20px 60px -10px rgba(31, 38, 135, 0.25)",
-        "glow-blue": "0 0 40px -5px rgba(51, 130, 255, 0.45)",
+        glass: "0 8px 32px 0 rgba(172, 45, 92, 0.10)",
+        "glass-lg": "0 20px 60px -10px rgba(172, 45, 92, 0.20)",
+        "glow-blue": "0 0 40px -5px rgba(227, 93, 144, 0.45)",
         floating: "0 12px 40px -8px rgba(0, 0, 0, 0.15)",
       },
       backgroundImage: {
-        "gradient-blue": "linear-gradient(135deg, #59a4ff 0%, #1b62f5 100%)",
+        "gradient-blue": "linear-gradient(135deg, #ed85ac 0%, #cf3f74 100%)",
       },
       keyframes: {
         "fade-in": {

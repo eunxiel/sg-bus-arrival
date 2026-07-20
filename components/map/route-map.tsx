@@ -94,7 +94,7 @@ export function RouteMap({ routeStops, liveBus, currentStopCode }: RouteMapProps
         {polylinePositions.length > 1 && (
           <Polyline
             positions={polylinePositions}
-            pathOptions={{ color: "#1b62f5", weight: 4, opacity: 0.85 }}
+            pathOptions={{ color: "#cf3f74", weight: 4, opacity: 0.85 }}
           />
         )}
 

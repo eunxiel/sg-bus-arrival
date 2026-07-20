@@ -33,10 +33,10 @@ export function StopClusterLayer({ stops, onStopClick }: StopClusterLayerProps) 
           html: `<div style="
             display:flex;align-items:center;justify-content:center;
             width:38px;height:38px;border-radius:9999px;
-            background:linear-gradient(135deg,#59a4ff,#1b62f5);
+            background:linear-gradient(135deg,#ed85ac,#cf3f74);
             color:white;font-weight:700;font-size:13px;
             border:3px solid white;
-            box-shadow:0 4px 14px rgba(27,98,245,0.4);
+            box-shadow:0 4px 14px rgba(207,63,116,0.4);
           ">${count}</div>`,
           className: "sgbus-cluster-icon",
           iconSize: [38, 38],

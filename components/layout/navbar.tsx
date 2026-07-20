@@ -100,28 +100,46 @@ export function Navbar() {
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: "auto" }}
           exit={{ opacity: 0, height: 0 }}
-          className="glass-panel mx-auto mt-2 max-w-6xl space-y-3 rounded-4xl p-4 md:hidden"
+          className="glass-panel mx-auto mt-2 flex max-w-6xl items-center gap-1.5 rounded-4xl p-3 md:hidden"
         >
-          <SearchBar />
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={locate}
-              className="btn-glass flex-1 py-2.5 text-sm"
-            >
-              <Locate className="h-4 w-4" aria-hidden="true" />
-              {t("nav.locateLabel")}
-            </button>
-            <Link href="/notifications" className="btn-glass flex-1 py-2.5 text-sm">
-              <Bell className="h-4 w-4" aria-hidden="true" />
-              {t("nav.alertsLabel")}
-            </Link>
-            <Link href="/settings" className="btn-glass flex-1 py-2.5 text-sm">
-              <Settings className="h-4 w-4" aria-hidden="true" />
-              {t("nav.settings")}
-            </Link>
+          <div className="min-w-0 flex-1">
+            <SearchBar />
           </div>
-          <LanguageMenu showLabel />
+          <button
+            type="button"
+            onClick={locate}
+            disabled={loading}
+            aria-label={t("nav.locateAria")}
+            className="btn-glass h-10 w-10 shrink-0 p-0"
+          >
+            <Locate
+              className={cn("h-4.5 w-4.5", loading && "animate-pulse")}
+              aria-hidden="true"
+            />
+          </button>
+          <Link
+            href="/notifications"
+            aria-label={
+              t("nav.notifications") +
+              (unreadCount > 0 ? t("nav.unreadSuffix", { count: unreadCount }) : "")
+            }
+            className="btn-glass relative h-10 w-10 shrink-0 p-0"
+          >
+            <Bell className="h-4.5 w-4.5" aria-hidden="true" />
+            {unreadCount > 0 && (
+              <span className="absolute -right-0.5 -top-0.5 flex h-4.5 w-4.5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white">
+                {unreadCount > 9 ? "9+" : unreadCount}
+              </span>
+            )}
+          </Link>
+          <Link
+            href="/settings"
+            aria-label={t("nav.settings")}
+            className="btn-glass h-10 w-10 shrink-0 p-0"
+          >
+            <Settings className="h-4.5 w-4.5" aria-hidden="true" />
+          </Link>
+          <LanguageMenu />
         </motion.div>
       )}
     </header>
