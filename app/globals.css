@@ -1,0 +1,167 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  @apply text-slate-900 antialiased;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+}
+
+/* Marina Bay Sands background, pinned to the viewport so it doesn't stretch
+   or crop oddly on tall/scrollable pages (background-attachment: fixed is
+   avoided since it's unreliable on iOS Safari). Split into two layers so a
+   night color-grade can be applied to the photo alone, independent of the
+   translucent wash that keeps foreground text readable. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background-image: url("/images/marina-bay-sands-night.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(0.65) contrast(1.05);
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background-image: linear-gradient(
+    rgba(10, 14, 30, 0.25),
+    rgba(255, 255, 255, 0.8) 55%
+  );
+}
+
+/* Custom scrollbar, Apple-ish */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(148, 163, 184, 0.5);
+  border-radius: 999px;
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-white/60 backdrop-blur-2xl border border-white/40 shadow-glass;
+  }
+
+  .glass-card {
+    @apply glass-panel rounded-4xl;
+  }
+
+  .glass-card-hover {
+    @apply glass-card transition-all duration-300 ease-out hover:shadow-glass-lg hover:-translate-y-0.5 hover:bg-white/70;
+  }
+
+  .glass-pill {
+    @apply bg-white/70 backdrop-blur-xl border border-white/40 rounded-full shadow-glass;
+  }
+
+  /* Premium frosted-glass treatment for the search bar: a soft diagonal sheen
+     over a blurred, saturated backdrop so the page behind reads as genuine
+     glass rather than a flat translucent card. */
+  .glass-search-bar {
+    @apply relative flex items-center rounded-full border border-white/50 shadow-glass backdrop-blur-2xl backdrop-saturate-150 transition-all duration-300 ease-out;
+    background-image: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.62) 0%,
+      rgba(255, 255, 255, 0.42) 55%,
+      rgba(255, 255, 255, 0.52) 100%
+    );
+  }
+  .glass-search-bar:focus-within {
+    @apply border-brand-300/70 shadow-glow-blue;
+    background-image: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.72) 0%,
+      rgba(255, 255, 255, 0.5) 55%,
+      rgba(255, 255, 255, 0.6) 100%
+    );
+  }
+
+  /* Outer "frame" that gives the hero search bar the same chunky, rounded
+     glass-card presentation as a floating pill inside a bigger glass card. */
+  .glass-search-frame {
+    @apply relative rounded-[32px] border border-white/50 p-2.5 shadow-glass-lg backdrop-blur-2xl backdrop-saturate-150;
+    background-image: linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.45) 0%,
+      rgba(255, 255, 255, 0.22) 50%,
+      rgba(255, 255, 255, 0.3) 100%
+    );
+  }
+
+  .glass-search-panel {
+    @apply relative rounded-4xl border border-white/70 shadow-glass-lg backdrop-blur-3xl backdrop-saturate-150;
+    background-image: linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.97) 0%,
+      rgba(255, 255, 255, 0.92) 45%,
+      rgba(255, 255, 255, 0.95) 100%
+    );
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-gradient-blue text-white font-medium shadow-glow-blue transition-transform duration-200 ease-out hover:scale-[1.03] active:scale-[0.97] disabled:opacity-50 disabled:pointer-events-none;
+  }
+
+  .btn-glass {
+    @apply inline-flex items-center justify-center gap-2 rounded-full glass-pill text-slate-700 font-medium transition-transform duration-200 ease-out hover:scale-[1.03] active:scale-[0.97];
+  }
+
+  .skeleton {
+    @apply relative overflow-hidden bg-slate-200/70 rounded-2xl;
+  }
+  .skeleton::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.5),
+      transparent
+    );
+    animation: shimmer 1.6s infinite;
+  }
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Leaflet overrides for glass-style popups & controls */
+.leaflet-container {
+  font-family: inherit;
+  background: #ffffff;
+}
+.leaflet-popup-content-wrapper {
+  border-radius: 20px !important;
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.85) !important;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15) !important;
+}
+.leaflet-popup-tip {
+  background: rgba(255, 255, 255, 0.85) !important;
+}
