@@ -49,6 +49,7 @@ export function PlaceInput({
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const pendingCurrentLocation = useRef(false);
   const [anchorRect, setAnchorRect] = useState<{ top: number; left: number; width: number } | null>(null);
 
@@ -134,6 +135,7 @@ export function PlaceInput({
       <div className="glass-search-bar gap-2 px-4 h-12 text-sm">
         <Icon className="h-4 w-4 shrink-0 text-slate-400" aria-hidden="true" />
         <input
+          ref={inputRef}
           type="text"
           value={query}
           onChange={(e) => {
@@ -190,14 +192,18 @@ export function PlaceInput({
                 >
                   {allowCurrentLocation && query.trim().length === 0 && (
                     <>
-                      <div className="flex w-full items-center gap-3 rounded-2xl p-3 text-left text-slate-400">
+                      <button
+                        type="button"
+                        onClick={() => inputRef.current?.focus()}
+                        className="flex w-full items-center gap-3 rounded-2xl p-3 text-left text-slate-400 transition-colors hover:bg-brand-50"
+                      >
                         <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-slate-400">
                           <Search className="h-4 w-4" aria-hidden="true" />
                         </span>
                         <span className="text-sm font-medium">
                           {t("trip.searchHint")}
                         </span>
-                      </div>
+                      </button>
                       <button
                         type="button"
                         onClick={handleUseCurrentLocation}
