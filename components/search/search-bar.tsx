@@ -81,7 +81,18 @@ export function SearchBar({
     function updateRect() {
       if (!containerRef.current) return;
       const r = containerRef.current.getBoundingClientRect();
-      setAnchorRect({ top: r.bottom + 8, left: r.left, width: r.width });
+      const margin = 12;
+      const viewportWidth = window.innerWidth;
+      // The anchor (search input) can be squeezed quite narrow next to the
+      // other navbar icons, which would truncate result titles/subtitles.
+      // Widen the dropdown past the anchor's own width when needed, capped
+      // to the viewport, and keep it within bounds horizontally.
+      const width = Math.max(r.width, Math.min(340, viewportWidth - margin * 2));
+      const left = Math.min(
+        Math.max(r.left, margin),
+        viewportWidth - width - margin
+      );
+      setAnchorRect({ top: r.bottom + 8, left, width });
     }
 
     updateRect();
