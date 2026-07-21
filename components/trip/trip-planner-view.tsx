@@ -20,15 +20,10 @@ interface TripPlanResponse {
   suggestions: TripSuggestion[];
 }
 
-export function TripPlannerView({
-  headingLevel = "h1",
-}: {
-  headingLevel?: "h1" | "h2";
-}) {
+export function TripPlannerView() {
   const { t } = useTranslation();
   const [from, setFrom] = useState<Place | null>(null);
   const [to, setTo] = useState<Place | null>(null);
-  const Heading = headingLevel;
 
   const ready = Boolean(from && to);
 
@@ -55,18 +50,11 @@ export function TripPlannerView({
 
   return (
     <div className="mx-auto max-w-2xl px-4 pt-6 pb-16">
-      <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}>
-        <Heading className="font-heading text-2xl font-bold text-slate-900">
-          {t("trip.title")}
-        </Heading>
-      </motion.div>
-      <p className="mt-1 text-sm text-slate-500">{t("trip.subtitle")}</p>
-
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.05 }}
-        className="glass-card relative mt-6 space-y-1 p-4"
+        className="glass-card relative space-y-1 p-4"
       >
         <PlaceInput
           icon={Navigation}

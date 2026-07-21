@@ -13,12 +13,12 @@ export default function HomePage() {
       <Navbar />
       <Hero />
       <ErrorBoundary>
-        <TripPlannerView headingLevel="h2" />
-      </ErrorBoundary>
-      <ErrorBoundary>
         <Suspense fallback={<BusStopListSkeleton />}>
           <NearbyStopsSection />
         </Suspense>
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <TripPlannerView />
       </ErrorBoundary>
     </main>
   );
