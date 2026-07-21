@@ -86,8 +86,8 @@ export function BusDetailsView({ serviceNo, busStopCode }: BusDetailsViewProps) 
         transition={{ duration: 0.4 }}
         className="glass-card mt-4 p-6"
       >
-        <div className="flex items-start justify-between gap-4">
-          <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-start justify-between gap-4">
+          <div className="flex items-center gap-3 min-w-0">
             <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-3xl bg-gradient-blue text-2xl font-bold text-white shadow-glow-blue">
               {serviceNo}
             </div>

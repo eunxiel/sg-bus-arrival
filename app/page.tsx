@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+
 import { Navbar } from "@/components/layout/navbar";
 import { Hero } from "@/components/layout/hero";
 import { TripPlannerView } from "@/components/trip/trip-planner-view";
