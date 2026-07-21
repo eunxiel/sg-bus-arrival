@@ -147,6 +147,10 @@ const en: Dict = {
 
   "search.searching": "Searching…",
 
+  "mrtMap.cta": "Tap to see the MRT map",
+  "mrtMap.title": "MRT System Map",
+  "mrtMap.closeAria": "Close MRT map",
+
   "trip.fromPlaceholder": "From: current location or search…",
   "trip.searchHint": "Search a stop, MRT, or mall",
   "trip.toPlaceholder": "To: search a stop, MRT, or mall…",
@@ -299,6 +303,10 @@ const zh: Dict = {
   "settings.mapSatellite": "卫星",
 
   "search.searching": "搜索中…",
+
+  "mrtMap.cta": "点击查看地铁路线图",
+  "mrtMap.title": "地铁路线图",
+  "mrtMap.closeAria": "关闭地铁路线图",
 
   "trip.fromPlaceholder": "出发地：当前位置或搜索…",
   "trip.searchHint": "搜索站点、地铁站或商场",
@@ -453,6 +461,10 @@ const th: Dict = {
 
   "search.searching": "กำลังค้นหา…",
 
+  "mrtMap.cta": "แตะเพื่อดูแผนที่ MRT",
+  "mrtMap.title": "แผนที่ระบบรถไฟฟ้า MRT",
+  "mrtMap.closeAria": "ปิดแผนที่ MRT",
+
   "trip.fromPlaceholder": "จาก: ตำแหน่งปัจจุบันหรือค้นหา…",
   "trip.searchHint": "ค้นหาป้ายรถเมล์ รถไฟฟ้า หรือห้างสรรพสินค้า",
   "trip.toPlaceholder": "ถึง: ค้นหาป้าย รถไฟฟ้า หรือห้างสรรพสินค้า…",
@@ -606,6 +618,10 @@ const ms: Dict = {
 
   "search.searching": "Mencari…",
 
+  "mrtMap.cta": "Ketik untuk lihat peta MRT",
+  "mrtMap.title": "Peta Sistem MRT",
+  "mrtMap.closeAria": "Tutup peta MRT",
+
   "trip.fromPlaceholder": "Dari: lokasi semasa atau cari…",
   "trip.searchHint": "Cari perhentian, MRT, atau pusat membeli-belah",
   "trip.toPlaceholder": "Ke: cari perhentian, MRT, atau pusat membeli-belah…",
@@ -758,6 +774,10 @@ const id: Dict = {
   "settings.mapSatellite": "Satelit",
 
   "search.searching": "Mencari…",
+
+  "mrtMap.cta": "Ketuk untuk lihat peta MRT",
+  "mrtMap.title": "Peta Sistem MRT",
+  "mrtMap.closeAria": "Tutup peta MRT",
 
   "trip.fromPlaceholder": "Dari: lokasi saat ini atau cari…",
   "trip.searchHint": "Cari halte, MRT, atau mal",
