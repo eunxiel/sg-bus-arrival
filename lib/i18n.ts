@@ -147,8 +147,8 @@ const en: Dict = {
 
   "search.searching": "Searching…",
 
-  "trip.title": "Plan a Trip",
-  "trip.subtitle": "Find the fastest bus between two places",
+  "trip.title": "Find the Fastest Bus",
+  "trip.subtitle": "Compare live travel times between two places",
   "trip.fromPlaceholder": "From: current location or search…",
   "trip.searchHint": "Search a stop, MRT, or mall",
   "trip.toPlaceholder": "To: search a stop, MRT, or mall…",
@@ -302,8 +302,8 @@ const zh: Dict = {
 
   "search.searching": "搜索中…",
 
-  "trip.title": "规划行程",
-  "trip.subtitle": "找出两地之间最快的公交路线",
+  "trip.title": "查找最快的公交",
+  "trip.subtitle": "比较两地之间的实时车程",
   "trip.fromPlaceholder": "出发地：当前位置或搜索…",
   "trip.searchHint": "搜索站点、地铁站或商场",
   "trip.toPlaceholder": "目的地：搜索站点、地铁站或商场…",
@@ -457,8 +457,8 @@ const th: Dict = {
 
   "search.searching": "กำลังค้นหา…",
 
-  "trip.title": "วางแผนการเดินทาง",
-  "trip.subtitle": "ค้นหารถเมล์ที่เร็วที่สุดระหว่างสองจุด",
+  "trip.title": "ค้นหารถเมล์ที่เร็วที่สุด",
+  "trip.subtitle": "เปรียบเทียบเวลาเดินทางแบบเรียลไทม์ระหว่างสองจุด",
   "trip.fromPlaceholder": "จาก: ตำแหน่งปัจจุบันหรือค้นหา…",
   "trip.searchHint": "ค้นหาป้ายรถเมล์ รถไฟฟ้า หรือห้างสรรพสินค้า",
   "trip.toPlaceholder": "ถึง: ค้นหาป้าย รถไฟฟ้า หรือห้างสรรพสินค้า…",
@@ -612,8 +612,8 @@ const ms: Dict = {
 
   "search.searching": "Mencari…",
 
-  "trip.title": "Rancang Perjalanan",
-  "trip.subtitle": "Cari bas terpantas antara dua tempat",
+  "trip.title": "Cari Bas Terpantas",
+  "trip.subtitle": "Bandingkan masa perjalanan langsung antara dua tempat",
   "trip.fromPlaceholder": "Dari: lokasi semasa atau cari…",
   "trip.searchHint": "Cari perhentian, MRT, atau pusat membeli-belah",
   "trip.toPlaceholder": "Ke: cari perhentian, MRT, atau pusat membeli-belah…",
@@ -767,8 +767,8 @@ const id: Dict = {
 
   "search.searching": "Mencari…",
 
-  "trip.title": "Rencana Perjalanan",
-  "trip.subtitle": "Temukan bus tercepat antara dua tempat",
+  "trip.title": "Cari Bus Tercepat",
+  "trip.subtitle": "Bandingkan waktu tempuh langsung antara dua tempat",
   "trip.fromPlaceholder": "Dari: lokasi saat ini atau cari…",
   "trip.searchHint": "Cari halte, MRT, atau mal",
   "trip.toPlaceholder": "Ke: cari halte, MRT, atau mal…",
