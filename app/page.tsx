@@ -3,7 +3,6 @@ import { Suspense } from "react";
 import { Navbar } from "@/components/layout/navbar";
 import { Hero } from "@/components/layout/hero";
 import { TripPlannerView } from "@/components/trip/trip-planner-view";
-import { MrtMapLauncher } from "@/components/layout/mrt-map-launcher";
 import { NearbyStopsSection } from "@/components/bus/nearby-stops-section";
 import { BusStopListSkeleton } from "@/components/ui/skeletons";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
@@ -15,9 +14,6 @@ export default function HomePage() {
       <Hero />
       <ErrorBoundary>
         <TripPlannerView />
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <MrtMapLauncher />
       </ErrorBoundary>
       <ErrorBoundary>
         <Suspense fallback={<BusStopListSkeleton />}>

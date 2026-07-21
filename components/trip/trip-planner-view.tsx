@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeftRight, ChevronDown, Flag, MapPin, Navigation } from "lucide-react";
 import { PlaceInput, type Place } from "@/components/trip/place-input";
+import { MrtMapLauncher } from "@/components/layout/mrt-map-launcher";
 import { AnimatedCountdown } from "@/components/bus/animated-countdown";
 import { OccupancyBadge, WheelchairBadge } from "@/components/bus/service-badges";
 import { RouteMapDynamic } from "@/components/map/route-map-dynamic";
@@ -83,6 +84,8 @@ export function TripPlannerView() {
           onSelect={setTo}
         />
       </motion.div>
+
+      <MrtMapLauncher />
 
       {!ready ? (
         <p className="mt-8 text-center text-sm text-slate-400">{t("trip.promptBoth")}</p>

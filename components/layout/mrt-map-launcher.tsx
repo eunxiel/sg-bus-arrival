@@ -10,7 +10,7 @@ export function MrtMapLauncher() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="mx-auto max-w-2xl px-4 pb-8">
+    <div className="mt-4">
       <button
         type="button"
         onClick={() => setOpen(true)}
